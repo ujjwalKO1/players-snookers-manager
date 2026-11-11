@@ -27,7 +27,7 @@ const NAV: { id: PageKey; label: string; icon: typeof LayoutDashboard; shortcut?
   { id: "reports", label: "Reports & Analytics", icon: BarChart3 },
   { id: "settings", label: "Settings", icon: Settings2 },
 ];
-const ROUTE: Record<PageKey, " /" | "/sessions" | "/new-session" | "/billing" | "/products" | "/expenses" | "/reports" | "/settings"> = { dashboard: "/", sessions: "/sessions", "new-session": "/new-session", billing: "/billing", products: "/products", expenses: "/expenses", reports: "/reports", settings: "/settings" };
+const ROUTE: Record<PageKey, "/" | "/sessions" | "/new-session" | "/billing" | "/products" | "/expenses" | "/reports" | "/settings"> = { dashboard: "/", sessions: "/sessions", "new-session": "/new-session", billing: "/billing", products: "/products", expenses: "/expenses", reports: "/reports", settings: "/settings" };
 const blankSnapshot = (): Snapshot => ({ services: [], tariffs: [], products: [], sessions: [], bills: [], expenses: [], settings: [], extensions: [] });
 const currency = (value: number) => `₹${Math.round(value).toLocaleString("en-IN")}`;
 const clockTime = (value: number) => new Date(value).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
@@ -84,7 +84,7 @@ function StatusPill({ status }: { status: ReturnType<typeof getSessionState> }) 
   return <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-mono text-[10px] font-bold uppercase ${style}`}><span className="size-1.5 rounded-full bg-current" />{status === "in-time" ? "IN TIME" : status.toUpperCase()}</span>;
 }
 
-function SessionLine({ session, service, data, now, onOpen, onSettle, onEnd, onExtend }: { session: Session; service?: Service; data: Snapshot; now: number; onOpen: () => void; onSettle: () => void; onEnd: () => void; onExtend: () => void }) {
+function SessionLine({ session, service, data, now, onOpen, onSettle, onEnd, onExtend }: { session: Session; service: Service | undefined; data: Snapshot; now: number; onOpen: () => void; onSettle: () => void; onEnd: () => void; onExtend: () => void }) {
   const state = getSessionState(session, now, data.settings);
   const overtime = getOvertimeCharge(session, service, data.tariffs, data.settings, now);
   const total = getAccruedCharge(session, service, data.tariffs, data.extensions, data.settings, now);
@@ -103,7 +103,7 @@ function SessionLine({ session, service, data, now, onOpen, onSettle, onEnd, onE
 class AppErrorBoundary extends Component<{ children: ReactNode }, { error: boolean }> {
   state = { error: false };
   static getDerivedStateFromError() { return { error: true }; }
-  render() { if (this.state.error) return <div className="glass-strong mx-auto my-24 max-w-lg rounded-3xl p-10 text-center"><ShieldCheck className="mx-auto mb-4 size-10 text-primary" /><h2 className="text-xl font-semibold">Let's get you back on track</h2><p className="mt-2 text-sm text-muted-foreground">This screen had a hiccup. Your saved lounge data is safe.</p><div className="mt-6 flex justify-center gap-2"><Button onClick={() => { this.setState({ error: false }); window.location.assign("/"); }} className="gold-button rounded-full">Return to Dashboard</Button><Button variant="outline" onClick={() => window.location.reload()} className="rounded-full">Reload</Button></div></div>; return this.props.children; }
+  override render() { if (this.state.error) return <div className="glass-strong mx-auto my-24 max-w-lg rounded-3xl p-10 text-center"><ShieldCheck className="mx-auto mb-4 size-10 text-primary" /><h2 className="text-xl font-semibold">Let's get you back on track</h2><p className="mt-2 text-sm text-muted-foreground">This screen had a hiccup. Your saved lounge data is safe.</p><div className="mt-6 flex justify-center gap-2"><Button onClick={() => { this.setState({ error: false }); window.location.assign("/"); }} className="gold-button rounded-full">Return to Dashboard</Button><Button variant="outline" onClick={() => window.location.reload()} className="rounded-full">Reload</Button></div></div>; return this.props.children; }
 }
 
 export function ManagerApp({ page }: { page: PageKey }) {
