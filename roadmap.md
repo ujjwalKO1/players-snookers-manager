@@ -1,0 +1,4 @@
+- [ ] Define shared types, centralized browser persistence, seed records, and pure billing math.
+- [ ] Build the shared shell and all manager pages, including session controls and keyboard shortcuts.
+- [ ] Add the frontend data-interface README, architecture note, and focused tests.
+- [ ] Verify navigation, billing/overtime behavior, and preview diagnostics.
