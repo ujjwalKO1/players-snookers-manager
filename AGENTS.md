@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application architecture
+
+- Keep this manager frontend-only: all browser persistence belongs in `src/lib/db.ts`, shared entity definitions in `src/types.ts`, and billing calculations in pure `src/lib/billing.ts` functions so the desktop host can replace the storage adapter without UI rewrites.
