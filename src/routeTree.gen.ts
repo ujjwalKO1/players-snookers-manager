@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BillingRouteImport } from './routes/billing'
+import { Route as ExpensesRouteImport } from './routes/expenses'
+import { Route as NewSessionRouteImport } from './routes/new-session'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SessionsRouteImport } from './routes/sessions'
+import { Route as SettingsRouteImport } from './routes/settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BillingRoute = BillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExpensesRoute = ExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewSessionRoute = NewSessionRouteImport.update({
+  id: '/new-session',
+  path: '/new-session',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SessionsRoute = SessionsRouteImport.update({
+  id: '/sessions',
+  path: '/sessions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/billing': typeof BillingRoute
+  '/expenses': typeof ExpensesRoute
+  '/new-session': typeof NewSessionRoute
+  '/products': typeof ProductsRoute
+  '/reports': typeof ReportsRoute
+  '/sessions': typeof SessionsRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/billing': typeof BillingRoute
+  '/expenses': typeof ExpensesRoute
+  '/new-session': typeof NewSessionRoute
+  '/products': typeof ProductsRoute
+  '/reports': typeof ReportsRoute
+  '/sessions': typeof SessionsRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/billing': typeof BillingRoute
+  '/expenses': typeof ExpensesRoute
+  '/new-session': typeof NewSessionRoute
+  '/products': typeof ProductsRoute
+  '/reports': typeof ReportsRoute
+  '/sessions': typeof SessionsRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/billing'
+    | '/expenses'
+    | '/new-session'
+    | '/products'
+    | '/reports'
+    | '/sessions'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/billing'
+    | '/expenses'
+    | '/new-session'
+    | '/products'
+    | '/reports'
+    | '/sessions'
+    | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/billing'
+    | '/expenses'
+    | '/new-session'
+    | '/products'
+    | '/reports'
+    | '/sessions'
+    | '/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BillingRoute: typeof BillingRoute
+  ExpensesRoute: typeof ExpensesRoute
+  NewSessionRoute: typeof NewSessionRoute
+  ProductsRoute: typeof ProductsRoute
+  ReportsRoute: typeof ReportsRoute
+  SessionsRoute: typeof SessionsRoute
+  SettingsRoute: typeof SettingsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/billing': {
+      id: '/billing'
+      path: '/billing'
+      fullPath: '/billing'
+      preLoaderRoute: typeof BillingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/expenses': {
+      id: '/expenses'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof ExpensesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/new-session': {
+      id: '/new-session'
+      path: '/new-session'
+      fullPath: '/new-session'
+      preLoaderRoute: typeof NewSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sessions': {
+      id: '/sessions'
+      path: '/sessions'
+      fullPath: '/sessions'
+      preLoaderRoute: typeof SessionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BillingRoute: BillingRoute,
+  ExpensesRoute: ExpensesRoute,
+  NewSessionRoute: NewSessionRoute,
+  ProductsRoute: ProductsRoute,
+  ReportsRoute: ReportsRoute,
+  SessionsRoute: SessionsRoute,
+  SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
